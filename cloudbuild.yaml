@@ -19,6 +19,16 @@ steps:
           --region=us-central1 \
           --port=8080 \
           --allow-unauthenticated
+
+    - name: 'gcr.io/cloud-builders/gcloud'
+      args: 
+        - 'pubsub'
+        - 'topics'
+        - 'publish'
+        - 'projects/steady-cat-401619/topics/midterm'
+        - '--message'
+        - 'Deployment completed.'
+
  
 options:
   # Set defaultLogsBucketBehavior to REGIONAL_USER_OWNED_BUCKET
