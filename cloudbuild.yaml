@@ -13,7 +13,7 @@ steps:
     args: 
       - '-c'
       - |
-        gcloud run deploy nodejs-app \
+        gcloud run deploy python-app \
           --image=us-central1-docker.pkg.dev/myproject-406204/mahara-midterm/python-flask:${COMMIT_SHA} \
           --platform=managed \
           --region=us-central1 \
