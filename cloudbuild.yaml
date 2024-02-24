@@ -25,7 +25,7 @@ steps:
         - 'pubsub'
         - 'topics'
         - 'publish'
-        - 'projects/steady-cat-401619/topics/midterm'
+        - 'projects/myproject-406204/topics/mahara-topic'
         - '--message'
         - 'Deployment completed.'
 
