@@ -6,7 +6,6 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/myproject-406204/mahara-midterm/python-flask:${COMMIT_SHA}']
 
-
   # Deploy the Docker container to Google Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'sh'
@@ -20,20 +19,19 @@ steps:
           --port=8080 \
           --allow-unauthenticated
 
-    - name: 'gcr.io/cloud-builders/gcloud'
-      args: 
-        - 'pubsub'
-        - 'topics'
-        - 'publish'
-        - 'projects/myproject-406204/topics/mahara-topic'
-        - '--message'
-        - 'Deployment completed.'
-
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: 
+      - 'pubsub'
+      - 'topics'
+      - 'publish'
+      - 'projects/myproject-406204/topics/mahara-topic'
+      - '--message'
+      - 'Deployment completed.'
  
 options:
   # Set defaultLogsBucketBehavior to REGIONAL_USER_OWNED_BUCKET
   # defaultLogsBucket: 'gs://your-build-logs-bucket' # Replace with your build logs bucket
   defaultLogsBucketBehavior: 'REGIONAL_USER_OWNED_BUCKET'
 images:
-# Store images in Google Artifact Registry
+  # Store images in Google Artifact Registry
   - us-central1-docker.pkg.dev/myproject-406204/mahara-midterm/python-flask:${COMMIT_SHA}
