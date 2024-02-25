@@ -38,7 +38,7 @@ steps:
       - 'pubsub'
       - 'topics'
       - 'publish'
-      - 'projects/myproject-406204/topics/mahara-topic'
+      - 'projects/myproject-406204/subscriptions/mahara-subcription'
       - '--message'
       - 'Mahara Deployment is completed.'
  
