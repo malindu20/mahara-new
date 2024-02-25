@@ -17,6 +17,17 @@ steps:
           --image=us-central1-docker.pkg.dev/myproject-406204/mahara-100944755/python-midterm:${COMMIT_SHA} \
           --platform=managed \
           --region=us-central1 \
+          --port=8080 \
+          --allow-unauthenticated
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'sh'
+    args: 
+      - '-c'
+      - |
+        gcloud run deploy python-app \
+          --image=us-central1-docker.pkg.dev/myproject-406204/mahara-100944755/python-midterm:${COMMIT_SHA} \
+          --platform=managed \
           --region=us-east1 \
           --port=8080 \
           --allow-unauthenticated
