@@ -1,12 +1,13 @@
+# Build the Docker image 
 steps:
-  # Build the Docker image 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'us-central1-docker.pkg.dev/myproject-406204/mahara-100944755/python-midterm:${COMMIT_SHA}', '.']
-  # Push the Docker image to the artifact registry
+
+# Push the Docker image to the artifact registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/myproject-406204/mahara-100944755/python-midterm:${COMMIT_SHA}']
 
-  # Deploy the Docker container to Google Cloud Run
+# Deploy the Docker container to Google Cloud Run in multiple regions
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'sh'
     args: 
@@ -15,12 +16,11 @@ steps:
         gcloud run deploy python-app \
           --image=us-central1-docker.pkg.dev/myproject-406204/mahara-100944755/python-midterm:${COMMIT_SHA} \
           --platform=managed \
-          --region=us-central1 \
+          --region=us-central1,us-east1 \
           --port=8080 \
           --allow-unauthenticated
 
-
-  # Deploy the messages to pub/sub topic, so that the developers can see it
+# Deploy the messages to pub/sub topic, so that the developers can see it
   - name: 'gcr.io/cloud-builders/gcloud'
     args: 
       - 'pubsub'
@@ -31,9 +31,7 @@ steps:
       - 'Mahara Deployment is completed.'
  
 options:
-  # Set defaultLogsBucketBehavior to REGIONAL_USER_OWNED_BUCKET
-  # defaultLogsBucket: 'gs://your-build-logs-bucket' # Replace with your build logs bucket
   defaultLogsBucketBehavior: 'REGIONAL_USER_OWNED_BUCKET'
+
 images:
-  # Store images in Google Artifact Registry
   - us-central1-docker.pkg.dev/myproject-406204/mahara-100944755/python-midterm:${COMMIT_SHA}
