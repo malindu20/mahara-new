@@ -27,7 +27,7 @@ steps:
       - 'publish'
       - 'projects/myproject-406204/topics/mahara-topic'
       - '--message'
-      - 'Deployment completed.'
+      - 'Mahara Deployment is completed.'
  
 options:
   # Set defaultLogsBucketBehavior to REGIONAL_USER_OWNED_BUCKET
