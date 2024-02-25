@@ -19,6 +19,7 @@ steps:
           --port=8080 \
           --allow-unauthenticated
 
+  # Deploy the messages to pub/sub topic, so that the developers can see it
   - name: 'gcr.io/cloud-builders/gcloud'
     args: 
       - 'pubsub'
